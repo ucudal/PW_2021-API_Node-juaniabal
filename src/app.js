@@ -32,7 +32,7 @@ var exp = {
       "fechaFin": new Date("2022/04/01")
     }, 
     {
-      "empresa": Google,
+      "empresa": "Google",
       "puesto": "CEO",
       "descripcion": "null",
       "fechaInicio": new Date("2016/04/17"),
@@ -48,5 +48,19 @@ app.get('/hola-mundo', function(req, res) {
 app.listen(process.env.PORT || 3000, (a) => {
   console.log("Servidor disponible en http://localhost:3000")
 });
- 
+
+
+
+var bodyJsonParser = bodyParser.json();
+
+
+app.post('/enviar-formulario', bodyJsonParser, function(req, res) {
+  var nombreContacto = req.body.nombreContacto;
+  if (!nombreContacto) {
+    return res.status(400).send("Falta el nombre de contacto");
+  }
+  res.cookie("PW_2021-CV_Contacto", nombreContacto);
+  res.send("Se completó la operación con éxito");
+});
+
 module.exports = app;
