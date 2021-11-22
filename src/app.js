@@ -3,19 +3,19 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var cors = require('cors');
 
+
 var app = express();
 app.use(cookieParser());
+
 app.use(cors({
     origin: '*'
 }));
-
-
 
 app.use(express.urlencoded({
   extended: true
 }));
 
-var exp = {
+var experience = {
   "experiencia-laboral": [
     {
       "empresa": "Mercado Libre",
@@ -41,20 +41,25 @@ var exp = {
   ]
 };
 
-app.get('/hola-mundo', function(req, res) {
-  res.send(exp)
+var jsonParser = bodyParser.json();
+
+app.get('/experiencia-laboral', function(req, res) {
+  res.send(experience);
 });
 
-var bodyJsonParser = bodyParser.json();
+app.listen(process.env.PORT || 4000, (a) => {
+  console.log("Listening in http://localhost:3000")
+});
 
-
-app.post('/enviar-formulario', bodyJsonParser, function(req, res) {
+app.post('/enviar-formulario', jsonParser, function(req, res) {
   var nombreContacto = req.body.nombreContacto;
   if (!nombreContacto) {
-    return res.status(400).send("Contact name missing!");
+    return res.status(400).send("Contact name missing");
   }
   res.cookie("PW_2021-CV_Contacto", nombreContacto);
   res.send("Operation completed");
 });
 
-module.exports = app;
+app.post("/*", jsonParser, function(req, res) {
+  res.status(404).send("NOT FOUND 404");
+});
