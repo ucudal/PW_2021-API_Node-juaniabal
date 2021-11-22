@@ -45,22 +45,16 @@ app.get('/hola-mundo', function(req, res) {
   res.send(exp)
 });
 
-app.listen(process.env.PORT || 3000, (a) => {
-  console.log("Servidor disponible en http://localhost:3000")
-});
-
-
-
 var bodyJsonParser = bodyParser.json();
 
 
 app.post('/enviar-formulario', bodyJsonParser, function(req, res) {
   var nombreContacto = req.body.nombreContacto;
   if (!nombreContacto) {
-    return res.status(400).send("Falta el nombre de contacto");
+    return res.status(400).send("Contact name missing!");
   }
   res.cookie("PW_2021-CV_Contacto", nombreContacto);
-  res.send("Se completó la operación con éxito");
+  res.send("Operation completed");
 });
 
 module.exports = app;
