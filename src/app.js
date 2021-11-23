@@ -59,14 +59,14 @@ app.listen(process.env.PORT || 3000, (a) => {
 app.post('/enviar-formulario', jsonParser, function(req, res) {
   var nombreContacto = req.body.nombreContacto;
   if (!nombreContacto) {
-    res.status(400).send("Contact name missing");
+    res.status(400).send("Falta el nombre de contact");
   }
   res.cookie("PW_2021-CV_Contacto", nombreContacto);
   res.send("Operation completed");
 });
 
 app.post("/*", jsonParser, function(req, res) {
-  res.status(404).send("NOT FOUND 404");
+  res.status(404).send("404 - No fue encontrado");
 });
 
 module.exports = app;
