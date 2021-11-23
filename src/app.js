@@ -59,7 +59,7 @@ app.listen(process.env.PORT || 3000, (a) => {
 app.post('/enviar-formulario', jsonParser, function(req, res) {
   var nombreContacto = req.body.nombreContacto;
   if (!nombreContacto) {
-    return res.status(400).send("Contact name missing");
+    res.status(400).send("Contact name missing");
   }
   res.cookie("PW_2021-CV_Contacto", nombreContacto);
   res.send("Operation completed");
@@ -68,3 +68,5 @@ app.post('/enviar-formulario', jsonParser, function(req, res) {
 app.post("/*", jsonParser, function(req, res) {
   res.status(404).send("NOT FOUND 404");
 });
+
+module.exports = app;
