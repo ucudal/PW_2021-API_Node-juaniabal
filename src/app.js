@@ -59,7 +59,7 @@ app.listen(process.env.PORT || 3000, (a) => {
 app.post('/enviar-formulario', jsonParser, function(req, res) {
   var nombreContacto = req.body.nombreContacto;
   if (!nombreContacto) {
-    res.status(400).send("Falta el nombre de contact");
+    res.status(400).send("Falta el nombre de contacto");
   }
   res.cookie("PW_2021-CV_Contacto", nombreContacto);
   res.send("Operation completed");
