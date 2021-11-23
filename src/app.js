@@ -10,12 +10,12 @@ app.use(cookieParser());
 app.use(cors({
     origin: '*'
 }));
-
+app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
 
-var experience = {
+let experience = {
   "experiencia-laboral": [
     {
       "empresa": "Mercado Libre",
@@ -47,7 +47,7 @@ app.get('/experiencia-laboral', function(req, res) {
   res.send(experience);
 });
 
-app.listen(process.env.PORT || 4000, (a) => {
+app.listen(process.env.PORT || 3000, (a) => {
   console.log("Listening in http://localhost:3000")
 });
 
